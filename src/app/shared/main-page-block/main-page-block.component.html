@@ -1,0 +1,4 @@
+<div class="p-text-bold" style="font-size: 1.5rem; text-align: center;">Task Timer</div>
+<app-task-short (newTask)="createdNewTask($event)"></app-task-short>
+<app-task-list [newTask$]="task$"></app-task-list>
+

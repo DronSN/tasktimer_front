@@ -1,0 +1,24 @@
+<div class="p-d-flex p-flex-column">
+  <div class="p-my-3">
+    <p-menubar [model]="items">
+      <ng-template pTemplate="start">
+        <div class="p-d-flex p-align-center">
+          <div>
+            <img src="assets/showcase/images/logo.svg" height="50" class="p-mr-2">
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="end">
+        <div class="p-d-flex p-align-center">
+          <button type="button" pButton label="{{ 'mainMenu.logout' | translate }}" style="margin-right:.25em"></button>
+        </div>
+      </ng-template>
+    </p-menubar>
+  </div>
+  <div class="p-d-flex p-flex-row p-as-end">
+    <div class="p-text-capitalize p-mx-2 p-as-center">{{ 'mainMenu.lang' | translate }}</div>
+    <p-selectButton (onChange)="setLanguage()" [options]="stateOptions" [(ngModel)]="currentLanguage" optionLabel="label" optionValue="value"></p-selectButton>
+  </div>
+  <app-main-page-block></app-main-page-block>
+</div>
+<router-outlet></router-outlet>

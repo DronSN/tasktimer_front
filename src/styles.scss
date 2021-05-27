@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+
+//PrimeNg theme and libraries
+@import "~primeicons/primeicons.css";
+@import "~primeng/resources/themes/saga-blue/theme.css";
+@import "~primeng/resources/primeng.min.css";
+
+html {
+  font-size: 14px;
+}
+
+body
+{
+  font-family: "Roboto", sans-serif;
+  background-color: var(--surface-50);
+}

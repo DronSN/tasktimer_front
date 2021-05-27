@@ -1,0 +1,45 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <div class="p-d-flex p-flex-column">
+    <div class="p-my-3 p-as-center task-input">
+          <span class="p-float-label">
+              <input id="detail-task-name" type="text" pInputText formControlName="name">
+              <label for="detail-task-name">{{ 'taskForm.name' | translate }}</label>
+              <button type="button" pButton pRipple icon="pi pi-times" styleClass="p-button-danger" (click)="taskForm.controls['name'].reset()"></button>
+          </span>
+      <small *ngIf="taskForm.controls['name'].invalid && taskForm.controls['name'].dirty" class="p-error">{{ 'validateMessage.required' | translate }}</small>
+    </div>
+    <div class="p-my-3 p-as-center task-input">
+          <span class="p-float-label">
+              <p-chips [class]="fixLabelPosition" [allowDuplicate]="false" inputId="task-detail-chips" formControlName="tags" separator="," [addOnBlur]="true"></p-chips>
+              <label for="task-detail-chips">{{ 'taskForm.tag' | translate }}</label>
+              <button type="button" pButton pRipple icon="pi pi-times" styleClass="p-button-danger" (click)="taskForm.controls['tags'].reset()"></button>
+          </span>
+    </div>
+    <div class="p-my-3 p-as-center">
+      <span class="p-float-label">
+        <textarea inputId="task-detail-description" rows="5" cols="50" pInputTextarea formControlName="description"></textarea>
+        <label for="task-detail-description">{{ 'taskForm.description' | translate }}</label>
+      </span>
+    </div>
+    <app-color-selector formControlName="color"></app-color-selector>
+    <div class="p-my-3 p-as-center">
+      <div class="p-d-flex p-flex-row">
+        <div class="p-as-center">
+          <div [class]="'p-mx-3 ' + 'task-badge status-' + (task?.status ? task?.status?.toLowerCase() : '')">{{'taskStatus.' + task?.status?.toLowerCase() | translate }}</div>
+        </div>
+        <button *ngIf="showStartButton(task?.status)" type="button" pButton pRipple icon="pi pi-play" class="p-button-rounded p-mr-2" (click)="onStart()"></button>
+        <button *ngIf="showPauseButton(task?.status)" type="button" pButton pRipple icon="pi pi-pause" class="p-button-rounded p-button-warning p-mr-2" (click)="onPause()"></button>
+        <button *ngIf="showCompleteButton(task?.status)" type="button" pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-success" (click)="onComplete()"></button>
+      </div>
+    </div>
+    <div class="p-my-3 p-as-center">
+      <span><b>Начало:</b> {{task?.start | date}}</span><br>
+      <span><b>Окончание:</b> {{task?.end | date}}</span>
+    </div>
+    <div class="p-mt-3 p-as-end translated-button-label">
+      <button type="button" pButton pRipple label="{{'primeng.cancel' | translate}}" icon="pi pi-times" class="p-button-icon-left p-button-text" (click)="onClose()"></button>
+      <button type="submit" pButton pRipple label="{{'primeng.save' | translate}}" icon="pi pi-check" class="p-button-text" (click)="onSave()"></button>
+    </div>
+  </div>
+</form>
+

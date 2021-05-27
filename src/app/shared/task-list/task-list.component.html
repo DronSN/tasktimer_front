@@ -1,0 +1,80 @@
+<div class="mytask p-d-flex p-flex-column p-jc-center">
+  <div class="card">
+  <p-toolbar styleClass="p-mb-4 translated-button-label">
+    <ng-template pTemplate="left">
+      <button pButton pRipple label="{{'primeng.delete' | translate}}" icon="pi pi-trash" class="p-button-danger"
+              [disabled]="!selectedTasks || !selectedTasks.length" (click)="deleteTasks()"></button>
+    </ng-template>
+    <ng-template pTemplate="right">
+      <button pButton pRipple label="{{'primeng.export' | translate}}" icon="pi pi-upload" class="p-button-help"></button>
+    </ng-template>
+  </p-toolbar>
+  <p-table #dt [value]="tasks" [rows]="10" dataKey="id" [rowHover]="true" [paginator]="true"  [(selection)]="selectedTasks">
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        <h5 class="p-m-0">{{ 'title.allTasks' | translate }}</h5>
+        <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" placeholder="{{ 'mainMenu.search' | translate }}..." />
+                </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 3rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th pSortableColumn="name">{{'taskTable.name' | translate}}<p-sortIcon field="name"></p-sortIcon></th>
+        <th pSortableColumn="color">{{'taskTable.color' | translate}}<p-sortIcon field="color"></p-sortIcon></th>
+        <th>{{'taskTable.action' | translate}}</th>
+        <th pSortableColumn="status">{{'taskTable.status' | translate}}<p-sortIcon field="status"></p-sortIcon></th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-task>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="task"></p-tableCheckbox>
+        </td>
+        <td>{{task.name}}</td>
+        <td><div [class]="'task-color-' + (task.color ? task.color.toLowerCase() : '')"></div></td>
+        <td>
+          <button *ngIf="showStartButton(task.status)" pButton pRipple icon="pi pi-play" class="p-button-rounded p-mr-2" (click)="onStart(task)"></button>
+          <button *ngIf="showPauseButton(task.status)" pButton pRipple icon="pi pi-pause" class="p-button-rounded p-button-warning p-mr-2" (click)="onPause(task)"></button>
+          <button *ngIf="showCompleteButton(task.status)" pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-success" (click)="onStop(task)"></button>
+        </td>
+        <td><span [class]="'task-badge status-' + (task.status ? task.status.toLowerCase() : '')">{{'taskStatus.' + task.status.toLowerCase() | translate }}</span></td>
+        <td>
+          <ng-template #infoButton [ngIf]="true" pTemplate>
+            <button pButton pRipple icon="pi pi-info" class="p-button-rounded p-mr-2"  (click)="op.toggle($event, infoButton)"></button>
+          </ng-template>
+          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editTask(task)"></button>
+          <p-overlayPanel #op>
+            <ng-template pTemplate>
+              <div class="p-d-flex p-flex-column p-ai-start">
+                <span><b>{{'taskForm.name' | translate}}</b>: {{task.name}}</span>
+                <span><b>{{'taskForm.tag' | translate}}</b>: {{task.tags.join(', ')}}</span>
+                <span><b>{{'taskForm.description' | translate}}</b>: {{task.description}}</span>
+                <span><b>{{'taskForm.start' | translate}}</b>: {{task.start | date}}</span>
+                <span><b>{{'taskForm.end' | translate}}</b>: {{task.end | date}}</span>
+              </div>
+            </ng-template>
+          </p-overlayPanel>
+
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        {{'title.totalTasks' | translate}}: {{tasks ? tasks.length : 0 }}
+      </div>
+    </ng-template>
+  </p-table>
+  </div>
+</div>
+
+<p-dialog [(visible)]="productDialog" [resizable]='true' header="{{'title.task' | translate}}" [modal]="true">
+    <app-task-detail (updateTask)="updateTask($event)" (closeEvent)="closeDialog($event)" [task]="currentTask"></app-task-detail>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}" acceptLabel="{{'primeng.accept' | translate}}" rejectLabel="{{'primeng.reject' | translate}}"></p-confirmDialog>

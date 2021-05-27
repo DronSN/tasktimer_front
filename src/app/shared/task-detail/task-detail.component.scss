@@ -1,0 +1,23 @@
+:host ::ng-deep .task-badge {
+  border-radius: 2px;
+  padding: .25em .5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .3px;
+}
+
+@mixin status-color($status-name, $text-color, $background-color) {
+  :host ::ng-deep #{$status-name} {
+    background: $background-color;
+    color: $text-color;
+  }
+}
+
+@include status-color(".status-stopped", #256029, #c8e6c9);
+@include status-color(".status-started", #c63737, #ffcdd2);
+@include status-color(".status-paused", #8a5340, #feedaf);
+
+:host ::ng-deep .translated-button-label .p-button-icon {
+    margin-right: 0.5rem;
+}

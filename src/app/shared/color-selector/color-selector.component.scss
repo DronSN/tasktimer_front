@@ -1,0 +1,26 @@
+@mixin color-checkbox($theme-color, $color-selector-name) {
+  :host ::ng-deep #{$color-selector-name}.p-togglebutton.p-button.p-highlight {
+    background: var($theme-color);
+    border-color: var($theme-color);
+  }
+
+  :host ::ng-deep #{$color-selector-name}.p-togglebutton.p-button:not(.p-disabled):not(.p-highlight):hover {
+    background: var($theme-color);
+    border-color: var($theme-color);
+  }
+
+  :host ::ng-deep #{$color-selector-name} {
+    background: var($theme-color);
+  }
+
+  :host ::ng-deep #{$color-selector-name}.p-togglebutton.p-button {
+    width: 2rem;
+    height: 2rem;
+  }
+};
+
+@include color-checkbox(--green-400, ".green-togglebutton");
+@include color-checkbox(--yellow-400, ".yellow-togglebutton");
+@include color-checkbox(--indigo-400, ".indigo-togglebutton");
+@include color-checkbox(--pink-400, ".pink-togglebutton");
+@include color-checkbox(--purple-400, ".purple-togglebutton");

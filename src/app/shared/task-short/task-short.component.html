@@ -1,0 +1,40 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <div class="mytask p-d-flex p-flex-column p-jc-center">
+      <div class="p-my-3 p-as-center task-input">
+        <span class="p-float-label">
+            <input id="task-name" type="text" pInputText formControlName="name">
+            <label for="task-name">{{ 'taskForm.name' | translate }}</label>
+            <button type="button" pButton pRipple icon="pi pi-times" styleClass="p-button-danger" (click)="taskForm.controls['name'].reset()"></button>
+        </span>
+        <small *ngIf="taskForm.controls['name'].invalid && taskForm.controls['name'].dirty" class="p-error">{{ 'validateMessage.required' | translate }}</small>
+      </div>
+      <div class="p-my-3 p-as-center task-input">
+          <span class="p-float-label">
+              <p-chips [allowDuplicate]="false" inputId="chips" formControlName="tags" separator="," [addOnBlur]="true"></p-chips>
+              <label for="chips">{{ 'taskForm.tag' | translate }}</label>
+              <button type="button" pButton pRipple icon="pi pi-times" styleClass="p-button-danger" (click)="taskForm.controls['tags'].reset()"></button>
+          </span>
+      </div>
+      <app-color-selector formControlName="color"></app-color-selector>
+      <div class="p-my-3 p-as-center">
+        <div class="p-d-flex p-flex-row p-jc-center">
+          <p-button label="{{ 'taskForm.description' | translate }}" icon="pi pi-pencil" iconPos="right"
+                    (click)="op.toggle($event)" [style]="{width: '30rem'}"></p-button>
+          <p-overlayPanel #op>
+            <ng-template pTemplate>
+              <div class="p-d-flex p-flex-column p-ai-end">
+                <textarea rows="5" cols="58" pInputTextarea formControlName="description"></textarea>
+                <span>
+                <button type="button" pButton class="p-mt-3 p-button-text" label="{{ 'primeng.clear' | translate }}" icon="pi pi-check" (click)="taskForm.controls['description'].reset()"></button>
+                <button type="button" pButton class="p-mt-3 p-button-text" label="{{ 'primeng.save' | translate }}" icon="pi pi-times" (click)="op.hide()"></button>
+                  </span>
+              </div>
+            </ng-template>
+          </p-overlayPanel>
+        </div>
+      </div>
+      <div class="start-button p-my-3 p-as-center">
+        <button pButton type="submit" [disabled]="!taskForm.valid" label="{{ 'taskForm.startButton' | translate }}"></button>
+      </div>
+  </div>
+</form>

@@ -1,0 +1,83 @@
+{
+  "title": {
+    "task": "Task",
+    "totalTasks": "Total tasks",
+    "allTasks": "All tasks",
+    "confirmTitle": "Confirm",
+    "confirmDeleteMessage": "Are you sure you want to delete the selected items?"
+  },
+  "taskTable": {
+    "name": "Task name",
+    "color": "Color",
+    "status": "Status",
+    "action": "Action",
+    "info": "Info"
+  },
+  "taskStatus": {
+    "started": "Started",
+    "stopped": "Stopped",
+    "paused": "Paused"
+  },
+  "mainMenu": {
+    "lang": "language",
+    "search": "Search",
+    "logout": "Logout",
+    "login": "Login"
+  },
+  "validateMessage": {
+    "required": "Fill field value"
+  },
+  "taskForm": {
+    "name": "Task name",
+    "startButton": "Start task",
+    "tag": "Task tag",
+    "color": "Color",
+    "descriptionInPlace": "Click to Edit",
+    "description": "Task description",
+    "start": "Start",
+    "end": "End"
+  },
+  "languages": {
+    "english": "English",
+    "russian": "Русский"
+  },
+  "primeng": {
+    "startsWith": "Starts with",
+    "contains": "Contains",
+    "notContains": "Not contains",
+    "endsWith": "Ends with",
+    "equals": "Equals",
+    "notEquals": "Not equals",
+    "noFilter": "No Filter",
+    "lt": "Less than",
+    "lte": "Less than or equal to",
+    "gt": "Greater than",
+    "gte": "Great then or equals",
+    "is": "Is",
+    "isNot": "Is not",
+    "before": "Before",
+    "after": "After",
+    "clear": "Clear",
+    "apply": "Apply",
+    "close": "Close",
+    "matchAll": "Match All",
+    "matchAny": "Match Any",
+    "addRule": "Add Rule",
+    "removeRule": "Remove Rule",
+    "accept": "Yes",
+    "reject": "No",
+    "choose": "Choose",
+    "upload": "Upload",
+    "cancel": "Cancel",
+    "save": "Save",
+    "dayNames": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "dayNamesShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    "dayNamesMin": ["Su","Mo","Tu","We","Th","Fr","Sa"],
+    "monthNames": ["January","February","March","April","May","June","July","August","September","October","November","December"],
+    "monthNamesShort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    "today": "Today",
+    "weekHeader": "Wk",
+    "export": "Export",
+    "delete": "Delete"
+  }
+}

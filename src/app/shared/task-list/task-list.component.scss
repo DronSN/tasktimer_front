@@ -1,0 +1,38 @@
+:host ::ng-deep .task-badge {
+  border-radius: 2px;
+  padding: .25em .5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .3px;
+}
+
+:host ::ng-deep .translated-button-label .p-button-icon {
+  margin-right: 0.5rem;
+}
+
+@mixin status-color($status-name, $text-color, $background-color) {
+  :host ::ng-deep #{$status-name} {
+    background: $background-color;
+    color: $text-color;
+  }
+}
+
+@mixin task-color($color-name, $task-color-class) {
+  :host ::ng-deep #{$task-color-class} {
+    border-radius: 2px;
+    background: var($color-name);
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+@include status-color(".status-stopped", #256029, #c8e6c9);
+@include status-color(".status-started", #c63737, #ffcdd2);
+@include status-color(".status-paused", #8a5340, #feedaf);
+
+@include task-color(--green-400, ".task-color-green");
+@include task-color(--yellow-400, ".task-color-yellow");
+@include task-color(--indigo-400, ".task-color-indigo");
+@include task-color(--pink-400, ".task-color-pink");
+@include task-color(--purple-400, ".task-color-purple");

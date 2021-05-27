@@ -1,0 +1,8 @@
+<div class="p-d-flex p-flex-row p-jc-center">
+  <div class="p-as-center" style="color: #6c757d">{{ 'taskForm.color' | translate }}</div>
+  <div *ngFor="let item of checkBoxes" class="p-m-2">
+    <p-toggleButton [disabled]="isDisabled" (onChange)="handleChange($event, item.colorName)" styleClass="{{item.colorName + '-togglebutton'}}" onIcon="pi pi-check"
+                    offIcon="pi" iconPos="center" [(ngModel)]="item.isChecked"></p-toggleButton>
+  </div>
+
+</div>
