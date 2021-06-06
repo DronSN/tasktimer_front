@@ -4,7 +4,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { TaskColor } from '../model/taskColor';
+import { TaskColorEnum } from '../model/task-color.enum';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 interface SelectedCheckBox {
@@ -39,8 +39,8 @@ export class ColorSelectorComponent implements OnInit, ControlValueAccessor {
   }
 
   private fillColorsArray(): void {
-    for (const currentColor in TaskColor) {
-      if ({}.hasOwnProperty.call(TaskColor, currentColor)) {
+    for (const currentColor in TaskColorEnum) {
+      if ({}.hasOwnProperty.call(TaskColorEnum, currentColor)) {
         this.checkBoxes.push({
           colorName: currentColor,
           isChecked: false

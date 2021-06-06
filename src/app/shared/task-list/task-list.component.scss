@@ -11,6 +11,10 @@
   margin-right: 0.5rem;
 }
 
+:host ::ng-deep .pi-filter-slash {
+  margin-right: 0.5rem;
+}
+
 @mixin status-color($status-name, $text-color, $background-color) {
   :host ::ng-deep #{$status-name} {
     background: $background-color;
@@ -36,3 +40,4 @@
 @include task-color(--indigo-400, ".task-color-indigo");
 @include task-color(--pink-400, ".task-color-pink");
 @include task-color(--purple-400, ".task-color-purple");
+@include task-color(--white-400, ".task-color-no-color");

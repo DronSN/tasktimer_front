@@ -1,13 +1,13 @@
-import { TaskColor } from './taskColor';
-import { TaskStatus } from './TaskStatus';
+import { TaskColorEnum } from './task-color.enum';
+import { TaskStatusEnum } from './task-status.enum';
 
 export interface Task {
   id: number;
   name: string;
   tags?: string[];
-  color?: TaskColor;
+  color?: TaskColorEnum;
   description?: string;
-  status?: TaskStatus;
+  status?: TaskStatusEnum;
   start?: number;
   end?: number;
 }

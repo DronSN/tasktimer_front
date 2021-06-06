@@ -30,6 +30,7 @@ import { TaskService } from './shared/service/task.service';
 import { ServicesApiClient } from './shared/service/services-api-client';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MainPageBlockComponent } from './shared/main-page-block/main-page-block.component';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 // данная функция необходима при AOT компиляции
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -73,7 +74,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         ToolbarModule,
         TooltipModule,
         DialogModule,
-        ConfirmDialogModule
+        ConfirmDialogModule,
+        MultiSelectModule
     ],
   providers: [
         AppConfigService,

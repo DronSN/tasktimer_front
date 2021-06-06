@@ -1,4 +1,12 @@
 {
+  "taskColor": {
+    "green": "Зелёный",
+    "yellow": "Жёлтый",
+    "indigo": "Синий",
+    "pink": "Розовый",
+    "purple": "Фиолетовый",
+    "noColor": "Отсутствует"
+  },
   "title": {
     "task": "Задача",
     "totalTasks": "Всего задач",
@@ -42,6 +50,7 @@
     "russian": "Русский"
   },
   "primeng": {
+    "customEquals": "Custom Equals",
     "startsWith": "Начинается с",
     "contains": "Содержит",
     "notContains": "Не содержит",
@@ -61,6 +70,7 @@
     "apply": "Применить",
     "close": "Закрыть",
     "matchAll": "Все совпадающие",
+    "any": "Любой",
     "matchAny": "Любой совпадающий",
     "addRule": "Добавить правило",
     "removeRule": "Удалить правило",

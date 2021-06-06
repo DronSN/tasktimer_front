@@ -1,4 +1,12 @@
 {
+  "taskColor": {
+    "green": "Green",
+    "yellow": "Yellow",
+    "indigo": "Indigo",
+    "pink": "Pink",
+    "purple": "Purple",
+    "noColor": "None"
+  },
   "title": {
     "task": "Task",
     "totalTasks": "Total tasks",
@@ -42,6 +50,7 @@
     "russian": "Русский"
   },
   "primeng": {
+    "customEquals": "Custom Equals",
     "startsWith": "Starts with",
     "contains": "Contains",
     "notContains": "Not contains",
@@ -60,6 +69,7 @@
     "clear": "Clear",
     "apply": "Apply",
     "close": "Close",
+    "any": "Any",
     "matchAll": "Match All",
     "matchAny": "Match Any",
     "addRule": "Add Rule",

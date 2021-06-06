@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from '../model/task';
 import { HttpOptions, ServicesApiClient } from './services-api-client';
+import { PageModel } from '../model/page-model';
+import { SortOrder } from '../model/sort-order.enum';
+import { Filter } from '../model/filter';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +19,19 @@ export class TaskService {
     return this.servicesApiClient.put(url, data);
   }
 
-  public getAllTasks(): Observable<Task[]> {
-    return this.servicesApiClient.get(this.localUrl);
+  public getAllPageTasks(page: number, pageSize: number, sortField?: string, sortOrder?: number,
+                         filter?: string[]): Observable<PageModel<Task>> {
+    const url = `${this.localUrl}`;
+    const options: HttpOptions = {
+      params: {
+        page: page.toString(),
+        size: pageSize.toString(),
+        sort: sortField || '',
+        order: SortOrder[sortOrder || 1],
+        fl: filter || []
+      }
+    };
+    return this.servicesApiClient.get(this.localUrl, options);
   }
 
   public createTask(data: Task): Observable<Task> {

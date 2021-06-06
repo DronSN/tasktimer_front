@@ -1,4 +1,4 @@
-export enum TaskColor {
+export enum TaskColorEnum {
   green = 'GREEN',
   yellow = 'YELLOW',
   indigo = 'INDIGO',

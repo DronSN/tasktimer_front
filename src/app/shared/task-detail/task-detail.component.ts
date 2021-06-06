@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Task } from '../model/task';
-import { TaskStatus } from '../model/TaskStatus';
+import { TaskStatusEnum } from '../model/task-status.enum';
 import { TaskService } from '../service/task.service';
 
 @Component({
@@ -50,15 +50,15 @@ export class TaskDetailComponent implements OnInit, OnChanges {
   }
 
   showCompleteButton(status?: string): boolean {
-    return (status === TaskStatus.started) || (status === TaskStatus.paused);
+    return (status === TaskStatusEnum.started) || (status === TaskStatusEnum.paused);
   }
 
   showPauseButton(status?: string): boolean {
-    return status === TaskStatus.started;
+    return status === TaskStatusEnum.started;
   }
 
   showStartButton(status?: string): boolean {
-    return status === TaskStatus.paused;
+    return status === TaskStatusEnum.paused;
   }
 
   onSave(): void {
