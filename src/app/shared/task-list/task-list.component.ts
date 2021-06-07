@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TaskStatusEnum } from '../model/task-status.enum';
 import { Task } from '../model/task';
 import { TaskService } from '../service/task.service';
@@ -17,9 +17,9 @@ import { Table } from 'primeng/table';
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent implements OnInit, OnDestroy {
-  private static NO_COLOR_CODE = 'no-color';
-  private static COLOR_FIELD = 'color';
-  private static IS_NULL_MATCH_MODE = 'isNull';
+  private static readonly NO_COLOR_CODE = 'no-color';
+  private static readonly COLOR_FIELD = 'color';
+  private static readonly IS_NULL_MATCH_MODE = 'isNull';
   tasks: Task[] = [];
   productDialog = false;
   selectedTasks?: Task[];
@@ -37,6 +37,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
   statusOption: SelectOptions[] = [];
   translationMap = new Map<string, string>();
   translationKey: string[];
+  @ViewChild('dt') taskTable?: Table;
 
   constructor(private taskService: TaskService,
               private confirmationService: ConfirmationService,
@@ -44,7 +45,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
 
     this.tableState = {
       currentPage: 0,
-      sortField: undefined,
+      sortField: 'status',
       sortOrder: SortOrder.asc
     };
     this.translationKey = ['title.confirmDeleteMessage', 'title.confirmTitle', 'taskColor.noColor',
@@ -90,8 +91,6 @@ export class TaskListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.loadTasks(this.page, this.pageSize, this.tableState.sortField || '', this.tableState.sortOrder);
-
     this.subscription.add(this.translateService.stream(this.translationKey)
       .subscribe((data) => this.setTranslation(data)));
 
@@ -136,7 +135,6 @@ export class TaskListComponent implements OnInit, OnDestroy {
   }
 
   editTask(task: any): void {
-    console.log('edit task');
     this.currentTask = task;
     this.productDialog = true;
   }
@@ -147,32 +145,25 @@ export class TaskListComponent implements OnInit, OnDestroy {
     }
   }
 
-  updateTask($event: Task): void {
-    if ($event) {
-      this.currentTask = $event;
-      this.tasks.forEach( (item, i, self) => {
-        if (item.id === this.currentTask?.id) {
-          self[i] = this.currentTask;
-        }
-      });
-    }
+  taskDetailUpdated(): void {
+    this.taskTable?.sortSingle();
   }
 
   onStart(task: Task): void {
     if (task.id) {
-      this.taskService.startTask(task.id).subscribe(taskData => this.updateTask(taskData));
+      this.taskService.startTask(task.id).subscribe(() => this.taskTable?.sortSingle());
     }
   }
 
   onPause(task: Task): void {
     if (task.id) {
-      this.taskService.pauseTask(task.id).subscribe(taskData => this.updateTask(taskData));
+      this.taskService.pauseTask(task.id).subscribe(() => this.taskTable?.sortSingle());
     }
   }
 
   onStop(task: Task): void {
     if (task.id) {
-      this.taskService.stopTask(task.id).subscribe(taskData => this.updateTask(taskData));
+      this.taskService.stopTask(task.id).subscribe(() => this.taskTable?.sortSingle());
     }
   }
 
@@ -190,9 +181,10 @@ export class TaskListComponent implements OnInit, OnDestroy {
   private deleteSelectedTasks(): void {
     const ids = this.selectedTasks?.map(task => task.id.toString());
     if (ids) {
-      this.taskService.deleteAllTask(ids).subscribe(() =>
-        this.loadTasks(this.page, this.pageSize, this.tableState.sortField || '', this.tableState.sortOrder));
-      this.selectedTasks = [];
+      this.taskService.deleteAllTask(ids).subscribe(() => {
+        this.taskTable?.sortSingle();
+        this.selectedTasks = [];
+      });
     }
   }
 
@@ -202,6 +194,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
       const selectedPage = $event.first / $event.rows;
       this.tableState.sortField = $event.sortField;
       this.tableState.sortOrder = $event.sortOrder || 1;
+      this.pageSize = $event.rows;
       const filter: string[] = TaskListComponent.createFilter($event.filters);
       this.loadTasks(selectedPage, this.pageSize, this.tableState.sortField || '', this.tableState.sortOrder, filter);
     }

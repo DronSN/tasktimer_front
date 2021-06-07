@@ -6,12 +6,14 @@
               [disabled]="!selectedTasks || !selectedTasks.length" (click)="deleteTasks()" ></button>
     </ng-template>
     <ng-template pTemplate="right">
-      <button pButton pRipple label="{{'primeng.export' | translate}}" icon="pi pi-upload" class="p-button-help"></button>
+      <button pButton pRipple label="{{'primeng.export' | translate}}" icon="pi pi-upload"
+              class="p-button-help"></button>
     </ng-template>
   </p-toolbar>
-  <p-table #dt [value]="tasks" [rows]="pageSize" [rowsPerPageOptions]="[10,25,50]" dataKey="id" [rowHover]="true" [paginator]="true"
-           [(selection)]="selectedTasks" [lazy]="true" (onLazyLoad)="sortAndFilterEvent($event)"
-           [totalRecords]="totalRecords" [loading]="loading" [globalFilterFields]="['name','color', 'status']">
+  <p-table #dt [value]="tasks" [rows]="pageSize" [rowsPerPageOptions]="[10,25,50]" dataKey="id" [rowHover]="true"
+           [paginator]="true" [(selection)]="selectedTasks" [lazy]="true" (onLazyLoad)="sortAndFilterEvent($event)"
+           [totalRecords]="totalRecords" [loading]="loading" [globalFilterFields]="['name','color', 'status']"
+           sortField="status">
     <ng-template pTemplate="caption">
       <div class="p-d-flex p-ai-center p-jc-between">
         <h3 class="p-m-0">{{ 'title.allTasks' | translate }}</h3>
@@ -117,7 +119,7 @@
 </div>
 
 <p-dialog [(visible)]="productDialog" [resizable]='true' header="{{'title.task' | translate}}" [modal]="true">
-    <app-task-detail (updateTask)="updateTask($event)" (closeEvent)="closeDialog($event)" [task]="currentTask"></app-task-detail>
+    <app-task-detail (updateTask)="taskDetailUpdated()" (closeEvent)="closeDialog($event)" [task]="currentTask"></app-task-detail>
 </p-dialog>
 
 <p-confirmDialog [style]="{width: '450px'}" acceptLabel="{{'primeng.accept' | translate}}" rejectLabel="{{'primeng.reject' | translate}}"></p-confirmDialog>
