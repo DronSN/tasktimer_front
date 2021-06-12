@@ -33,8 +33,8 @@
       </div>
     </div>
     <div class="p-my-3 p-as-center">
-      <span><b>Начало:</b> {{task?.start | date}}</span><br>
-      <span><b>Окончание:</b> {{task?.end | date}}</span>
+      <span><b>Начало:</b> {{task?.start | date: "medium"}}</span><br>
+      <span *ngIf="task?.stop"><b>Окончание:</b> {{task?.stop | date: "medium"}}</span>
     </div>
     <div class="p-mt-3 p-as-end translated-button-label">
       <button type="button" pButton pRipple label="{{'primeng.cancel' | translate}}" icon="pi pi-times" class="p-button-icon-left p-button-text" (click)="onClose()"></button>

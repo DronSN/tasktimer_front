@@ -14,6 +14,11 @@ export class TaskService {
 
   constructor(private servicesApiClient: ServicesApiClient) { }
 
+  public getTaskWithDuration(id: number): Observable<Task> {
+    const url = `${this.localUrl}/${id}/duration`;
+    return this.servicesApiClient.get(url, {});
+  }
+
   public updateTask(data: Task): Observable<Task> {
     const url = `${this.localUrl}`;
     return this.servicesApiClient.put(url, data);

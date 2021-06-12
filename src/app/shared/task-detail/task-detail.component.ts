@@ -22,8 +22,10 @@ export class TaskDetailComponent implements OnInit, OnChanges {
   });
   fixLabelPosition = '';
 
-  @Input()
   task?: Task;
+
+  @Input()
+  taskId?: number;
 
   @Output()
   closeEvent: EventEmitter<boolean> = new EventEmitter<boolean>(false);
@@ -42,6 +44,9 @@ export class TaskDetailComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    if (this.taskId) {
+      this.taskService.getTaskWithDuration(this.taskId).subscribe(data => this.task = data);
+    }
   }
 
   onSubmit(): void {

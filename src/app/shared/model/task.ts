@@ -9,5 +9,7 @@ export interface Task {
   description?: string;
   status?: TaskStatusEnum;
   start?: number;
-  end?: number;
+  stop?: number;
+  duration?: number;
+  times?: number;
 }

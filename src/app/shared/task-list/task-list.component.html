@@ -7,7 +7,7 @@
     </ng-template>
     <ng-template pTemplate="right">
       <button pButton pRipple label="{{'primeng.export' | translate}}" icon="pi pi-upload"
-              class="p-button-help"></button>
+              class="p-button-help" (click)="exportExcel()"></button>
     </ng-template>
   </p-toolbar>
   <p-table #dt [value]="tasks" [rows]="pageSize" [rowsPerPageOptions]="[10,25,50]" dataKey="id" [rowHover]="true"
@@ -19,7 +19,8 @@
         <h3 class="p-m-0">{{ 'title.allTasks' | translate }}</h3>
         <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" placeholder="{{ 'mainMenu.search' | translate }}..." />
+                    <input pInputText type="text" placeholder="{{ 'mainMenu.search' | translate }}..."
+                           (input)="dt.filterGlobal($any($event.target).value, 'contains')"/>
                 </span>
       </div>
     </ng-template>
@@ -98,10 +99,10 @@
             <ng-template pTemplate>
               <div class="p-d-flex p-flex-column p-ai-start">
                 <span><b>{{'taskForm.name' | translate}}</b>: {{task.name}}</span>
-                <span><b>{{'taskForm.tag' | translate}}</b>: {{task.tags.join(', ')}}</span>
-                <span><b>{{'taskForm.description' | translate}}</b>: {{task.description}}</span>
-                <span><b>{{'taskForm.start' | translate}}</b>: {{task.start | date}}</span>
-                <span><b>{{'taskForm.end' | translate}}</b>: {{task.end | date}}</span>
+                <span *ngIf="task.tags.join()"><b>{{'taskForm.tag' | translate}}</b>: {{task.tags.join(', ')}}</span>
+                <span *ngIf="task.description"><b>{{'taskForm.description' | translate}}</b>: {{task.description}}</span>
+                <span *ngIf="task.start"><b>{{'taskForm.start' | translate}}</b>: {{task.start | date:"medium"}}</span>
+                <span *ngIf="task.stop"><b>{{'taskForm.end' | translate}}</b>: {{task.stop | date: "medium" }}</span>
               </div>
             </ng-template>
           </p-overlayPanel>
@@ -119,7 +120,7 @@
 </div>
 
 <p-dialog [(visible)]="productDialog" [resizable]='true' header="{{'title.task' | translate}}" [modal]="true">
-    <app-task-detail (updateTask)="taskDetailUpdated()" (closeEvent)="closeDialog($event)" [task]="currentTask"></app-task-detail>
+    <app-task-detail (updateTask)="taskDetailUpdated()" (closeEvent)="closeDialog($event)" [taskId]="currentTask.id"></app-task-detail>
 </p-dialog>
 
 <p-confirmDialog [style]="{width: '450px'}" acceptLabel="{{'primeng.accept' | translate}}" rejectLabel="{{'primeng.reject' | translate}}"></p-confirmDialog>
